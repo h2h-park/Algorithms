@@ -1,3 +1,6 @@
+//https://www.acmicpc.net/problem/1753
+
+#include <stdio.h>
 #include <vector>
 #include <queue>
 
@@ -24,10 +27,9 @@ public:
 
 	void add_edge(int x, int y, int z) {
 		vec[x].push_back({ y, z });
-		vec[y].push_back({ x, z });
 	}
 
-	int shortest(int st, int en) {
+	int* shortest(int st) {
 		int i;
 		std::priority_queue<data> pq;
 		for (i = 1; i <= n; i++) {
@@ -49,6 +51,26 @@ public:
 				}
 			}
 		}
-		return dis[en];
+		return dis;
 	}
 };
+
+int main(void) {
+	int n, m, start;
+	int u, v, w;
+	scanf("%d %d", &n, &m);
+	scanf("%d", &start);
+
+	Dijkstra D(n);
+	for (int i = 1; i <= m; i++) {
+		scanf("%d %d %d", &u, &v, &w);
+		D.add_edge(u, v, w);
+	}
+
+	int* dis = D.shortest(start);
+	for (int i = 1; i <= n; i++) {
+		if (dis[i] < D.INF) printf("%d\n", dis[i]);
+		else puts("INF");
+	}
+	return false;
+}
