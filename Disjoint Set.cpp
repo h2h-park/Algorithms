@@ -13,6 +13,10 @@ public:
 		for (int i = 1; i <= n; i++) par[i] = i;
 	}
 
+	~Disjoint(void) {
+		delete[] par;
+	}
+
 	int find(int p) {
 		return (par[p] == p) ? p : (par[p] = find(par[p]));
 	}

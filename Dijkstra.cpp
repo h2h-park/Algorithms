@@ -27,6 +27,12 @@ public:
 		check = new bool[n + 1];
 	}
 
+	~Dijkstra(void) {
+		delete[] vec;
+		delete[] dis;
+		delete[] check;
+	}
+
 	void add_edge(int x, int y, T z) {
 		vec[x].push_back({ y, z });
 	}
