@@ -4,32 +4,34 @@
 #include <vector>
 #include <queue>
 
+template <typename T>
 class Dijkstra {
 public:
-	const int INF = 1 << 29;
+	const T INF = 1e9;
 	int n;
 	struct data {
-		int x, cost;
+		int x;
+		T cost;
 		const bool operator < (const data &rhs) const {
 			return this->cost > rhs.cost;
 		}
 	};
 	std::vector<data>* vec;
-	int* dis;
+	T* dis;
 	bool* check;
 
 	Dijkstra(int n) {
 		this->n = n;
 		vec = new std::vector<data>[n + 1];
-		dis = new int[n + 1];
+		dis = new T[n + 1];
 		check = new bool[n + 1];
 	}
 
-	void add_edge(int x, int y, int z) {
+	void add_edge(int x, int y, T z) {
 		vec[x].push_back({ y, z });
 	}
 
-	int* shortest(int st) {
+	T* shortest(int st) {
 		int i;
 		std::priority_queue<data> pq;
 		for (i = 1; i <= n; i++) {
@@ -61,7 +63,7 @@ int main(void) {
 	scanf("%d %d", &n, &m);
 	scanf("%d", &start);
 
-	Dijkstra D(n);
+	Dijkstra<int> D(n);
 	for (int i = 1; i <= m; i++) {
 		scanf("%d %d %d", &u, &v, &w);
 		D.add_edge(u, v, w);
